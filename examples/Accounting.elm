@@ -3,7 +3,7 @@ module Examples.Accounting exposing (..)
 import Constraint exposing (..)
 
 hole : a
-hole = hole
+hole = Debug.crash "hole"
 
 type HOLE = HOLE
 
@@ -38,20 +38,20 @@ type alias Environment env value = Constraint env (List value)
 (>=>) (Constraint f) (Constraint g) =
   ask <&> (\a -> List.concatMap g (f a))
 
-clientOrders' : Environment ClientOrderSheet Order
-clientOrders' =
+clientOrders_ : Environment ClientOrderSheet Order
+clientOrders_ =
   hole
 
-execute' : (Market, Account) -> Environment Order Execution
-execute' =
+execute_ : (Market, Account) -> Environment Order Execution
+execute_ =
   hole
 
-allocate' : List Account -> Environment Execution Trade
-allocate' =
+allocate_ : List Account -> Environment Execution Trade
+allocate_ =
   hole
 
-tradeGeneration' : (Market, Account, List Account) -> Environment ClientOrderSheet Trade
-tradeGeneration' (market, broker, clientAccounts) =
-  clientOrders'
-    >=> execute' (market, broker)
-    >=> allocate' clientAccounts
+tradeGeneration_ : (Market, Account, List Account) -> Environment ClientOrderSheet Trade
+tradeGeneration_ (market, broker, clientAccounts) =
+  clientOrders_
+    >=> execute_ (market, broker)
+    >=> allocate_ clientAccounts
