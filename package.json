@@ -1,0 +1,27 @@
+{
+  "name": "elm-constraint",
+  "version": "1.1.0",
+  "description": "Experimenting with constraints",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "elm": "elm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joneshf/elm-constraint.git"
+  },
+  "author": "Hardy Jones <jones3.hardy@gmail.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/joneshf/elm-constraint/issues"
+  },
+  "homepage": "https://github.com/joneshf/elm-constraint#readme",
+  "devDependencies": {
+    "elm": "0.18.0",
+    "elm-format": "0.7.0-exp",
+    "elm-live": "2.7.5"
+  }
+}
