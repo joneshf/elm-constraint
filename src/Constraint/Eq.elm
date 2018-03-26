@@ -42,8 +42,8 @@ eqMaybe constraint =
     case (x, y) of
       (Nothing, Nothing) ->
         True
-      (Just x', Just y') ->
-        constraint.eq x' y'
+      (Just x_, Just y_) ->
+        constraint.eq x_ y_
       _ ->
         False
   }
@@ -56,10 +56,10 @@ eqEither aConstraint bConstraint =
   { aConstraint
   | eq = \x y ->
     case (x, y) of
-      (Err x', Err y') ->
-        aConstraint.eq x' y'
-      (Ok x', Ok y') ->
-        bConstraint.eq x' y'
+      (Err x_, Err y_) ->
+        aConstraint.eq x_ y_
+      (Ok x_, Ok y_) ->
+        bConstraint.eq x_ y_
       _ ->
         False
   }
@@ -69,8 +69,8 @@ If we have an `Eq a r`, then we can make an `Eq (List a) r`.
 -}
 eqList : Eq a r -> Eq (List a) r
 eqList constraint =
-  let equateLists list list' =
-    case (list, list') of
+  let equateLists list list_ =
+    case (list, list_) of
       ([], []) ->
         True
       (x::xs, y::ys) ->

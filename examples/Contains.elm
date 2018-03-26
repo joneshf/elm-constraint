@@ -12,12 +12,12 @@ contains y xs =
     [] ->
       False
 
-contains' : a -> List a -> Constraint (Eq a r) Bool
-contains' y xs =
+contains_ : a -> List a -> Constraint (Eq a r) Bool
+contains_ y xs =
   ask >>= \c ->
     case xs of
       x::xss ->
-        contains' y xss <&> \b ->
+        contains_ y xss <&> \b ->
           c.eq x y || b
       [] ->
         pure False
@@ -30,26 +30,26 @@ sum ns =
     [] ->
       0
 
-sum' : List a -> Constraint (Monoid a r) a
-sum' ns =
+sum_ : List a -> Constraint (Monoid a r) a
+sum_ ns =
   ask >>= \c ->
     case ns of
       n::nss ->
-        sum' nss <&> c.concat n
+        sum_ nss <&> c.concat n
       [] ->
         pure c.identity
 
 sumIfContained : a -> List a -> Constraint (Monoid a (Eq a r)) a
 sumIfContained x xs =
-  contains' x xs >>= \b ->
+  contains_ x xs >>= \b ->
     if b then
-      sum' xs
+      sum_ xs
     else
-      sum' []
+      sum_ []
 
 total : Constraint (Monoid number {}) number
 total =
-  sum' [1,2,3]
+  sum_ [1,2,3]
 
 six : Int
 six =

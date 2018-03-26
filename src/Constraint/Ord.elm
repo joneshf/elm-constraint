@@ -54,8 +54,8 @@ ordMaybe constraint =
         LT
       (Just _, Nothing) ->
         GT
-      (Just x', Just y') ->
-        constraint.compare x' y'
+      (Just x_, Just y_) ->
+        constraint.compare x_ y_
   }
 
 {-|
@@ -66,14 +66,14 @@ ordEither aConstraint bConstraint =
   { aConstraint
   | compare = \x y ->
     case (x, y) of
-      (Err x', Err y') ->
-        aConstraint.compare x' y'
+      (Err x_, Err y_) ->
+        aConstraint.compare x_ y_
       (Err _, Ok _) ->
         LT
       (Ok _, Err _) ->
         GT
-      (Ok x', Ok y') ->
-        bConstraint.compare x' y'
+      (Ok x_, Ok y_) ->
+        bConstraint.compare x_ y_
   }
 
 {-|
@@ -81,8 +81,8 @@ If we have an `Ord a r`, then we can make an `Ord (List a) r`.
 -}
 ordList : Ord a r -> Ord (List a) r
 ordList constraint =
-  let compareLists list list' =
-    case (list, list') of
+  let compareLists list list_ =
+    case (list, list_) of
       ([], []) ->
         EQ
       ([], _) ->
